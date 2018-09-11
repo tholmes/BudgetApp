@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <div class="row justify-content-between mb-3 mr-0">
+    <div class="col font-weight-total" style="padding-left: 0px;">TOTAL = ${{ total }}</div>
+    <div class="col text-right">
+      <a class="btn btn-sm btn-success" href="" ng-click="openCategoryModal()"><span class="fa fa-plus"> New Category</span></a>
+    </div>
+  </div>
+  <div class="row">
+    <div ng-repeat="category in categories | orderBy : 'category'" class="col-lg-6">
+      <div class="row row-background-grey table">
+        <div class="col-6">{{ category.category }}</div>
+        <div class="col-4">${{ getAllocation(category) }}</div>
+        <div class="col-1">
+          <a class="btn btn-sm btn-primary" href="" ng-click="openCategoryModal(category)"><span class="fa fa-pencil"></span></a>
+        </div>
+        <div class="col-1">
+          <a class="btn btn-sm btn-danger" href="" ng-click="deleteCategory(category)"><span class="fa fa-trash-o"></span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  

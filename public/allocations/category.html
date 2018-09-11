@@ -1,0 +1,38 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{ title }} Category</h3>
+</div>
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="activity-container">
+      <div class="row">
+        <div class="col">
+          <form name="createEditCategory" ng-submit="submit()">
+            <div class="row form-row">
+              <div class="row col">Name</div>
+              <div class="row col">
+                <input placeholder="Tithing" class="col" type="text" ng-model="categoryName" value="">
+              </div>
+            </div>
+            <div class="row form-row">
+              <div class="row col">Allocation ($)</div>
+              <div class="row col">
+                <input placeholder="10.00" class="col" type="text" ng-model="categoryAllocation" value="">
+              </div>
+            </div>
+            <div class="row form-row">
+              <div class="row col">Balance ($)</div>
+              <div class="row col">
+                <input placeholder="0.00" class="col" type="text" ng-model="categoryBalance" value="">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <a ng-if="title === 'Create'" class="btn btn-primary" href="" ng-click="create()">Create</a>
+  <a ng-if="title === 'Edit'" class="btn btn-primary" href="" ng-click="update()">Save</a>
+  <a class="btn btn-warning" href="" ng-click="cancel()">Cancel</a>
+</div>

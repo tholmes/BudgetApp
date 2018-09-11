@@ -1,0 +1,158 @@
+html {
+  background-color: white;
+}
+
+li.active a.tab-active,
+.nav-tabs li.active a:hover,
+.nav-tabs li.active a:focus {
+  color: white;
+  background-color: #172d5d;
+}
+li a.tab-active,
+.nav-tabs li a:focus,
+.pow-accordion-tab.card-header {
+  color: white;
+  background-color: #294adc;
+}
+.pow-accordion-tab > .card-title,
+.pow-accordion-tab-open > .card-title {  
+  margin-bottom: 0px;
+}
+.onhover:hover {
+  background-color: #172d5d;
+  cursor: pointer;
+}
+.nav-tabs li a:hover{
+  color: white;
+  background-color: #172d5d;
+}
+.accordion-toggle,
+a.accordion-toggle:hover {
+  color: white;
+  text-decoration: none;
+}
+.pow-accordion-tab-open.card-header {
+  color: white;
+  background-color: #172d5d;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: white;
+  background-color: #172d5d;
+
+  /*background: #172d5d; /* For browsers that do not support gradients */
+  /*background: -webkit-linear-gradient(-90deg, #172d5d, #294adc); /* For Safari 5.1 to 6.0 */
+  /*background: -o-linear-gradient(-90deg, #172d5d, #294adc); /* For Opera 11.1 to 12.0 */
+  /*background: -moz-linear-gradient(-90deg, #172d5d, #294adc); /* For Firefox 3.6 to 15 */
+  /*background: linear-gradient(-90deg, #172d5d, #294adc); /* Standard syntax */
+
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.nav-pills .nav-link {
+  color: white;
+  background-color: #294adc;
+  
+  /*background: #294adc; /* For browsers that do not support gradients */
+  /*background: -webkit-linear-gradient(90deg, #172d5d, #294adc); /* For Safari 5.1 to 6.0 */
+  /*background: -o-linear-gradient(90deg, #172d5d, #294adc); /* For Opera 11.1 to 12.0 */
+  /*background: -moz-linear-gradient(90deg, #172d5d, #294adc); /* For Firefox 3.6 to 15 */
+  /*background: linear-gradient(90deg, #172d5d, #294adc); /* Standard syntax */
+  
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.nav-pills a:hover {
+  color: white;
+  background-color: #172d5d;
+
+  /*background: #172d5d; /* For browsers that do not support gradients */
+  /*background: -webkit-linear-gradient(-90deg, #172d5d, #294adc); /* For Safari 5.1 to 6.0 */
+  /*background: -o-linear-gradient(-90deg, #172d5d, #294adc); /* For Opera 11.1 to 12.0 */
+  /*background: -moz-linear-gradient(-90deg, #172d5d, #294adc); /* For Firefox 3.6 to 15 */
+  /*background: linear-gradient(-90deg, #172d5d, #294adc); /* Standard syntax */
+}
+
+.menu > li > a:hover,
+.menu > li > a:focus,
+.menu > li > a:active,
+.menu .open > a,
+.menu .open > a:focus,
+.menu .open > a:hover {
+  background-color: #141F48;
+}
+
+.menu > a:hover,
+.menu > a:focus,
+.menu > a:active,
+.menu .open > a,
+.menu .open > a:focus,
+.menu .open > a:hover {
+  background-color: #141F48;
+  color: white;
+}
+
+.pow-container {
+  margin-left: 45px;
+  margin-right: 45px;
+  margin-top: 50px;
+  margin-bottom: 120px;
+  width: auto;
+}
+.tab-content-test {
+  border-style: solid;
+  border-color: grey;
+  border-width: thin;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.tab-font {
+  font-size: 10pt;
+}
+.activity-container {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+@-webkit-keyframes fadeEffect {
+from {opacity: 0;}
+to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+from {opacity: 0;}
+to {opacity: 1;}
+}
+
+label {
+  cursor: pointer;
+  /* Style as you please, it will become the visible UI component. */
+}
+
+.form-row {  
+  margin-bottom: 10px;
+}
+
+.form-label {
+  font-weight: 500;
+}
+
+.form-column {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+.row-background-grey {
+  background-color: rgba(0,0,0,.05);
+}
+
+.font-weight-total {
+  font-weight: 700;
+}
+
+.state-officer-container {
+  margin-top: 75px;
+  margin-bottom: 50px;
+}

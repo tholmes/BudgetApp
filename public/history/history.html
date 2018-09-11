@@ -1,0 +1,48 @@
+<div class="container-fluid">
+  <div class="row justify-content-between">
+    <div class="col">
+      <input type="text" class="col-auto form-control" ng-model="tableFilter" placeholder="Search..." value="">
+    </div>
+    <div class="col-auto row justify-content-end" style="margin-right: 0px">
+      <div style="margin-right: 10px;" ng-show="radioDateFilter === 'customDate'">
+        Start Date:<md-datepicker md-open-on-focus ng-model="startDate"></md-datepicker>
+         End Date:<md-datepicker md-open-on-focus ng-model="endDate"></md-datepicker>
+      </div>
+      <div class="btn-group">
+        <label class="btn btn-sm btn-primary" ng-model="radioDateFilter" uib-btn-radio="'customDate'">Custom</label>
+        <label class="btn btn-sm btn-primary" ng-model="radioDateFilter" uib-btn-radio="'defaultDate'">{{ defaultDateText }}</label>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3"></div>
+  <div class="row">
+    <div class="col">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"># <a href="" ng-click="sort(COLUMNS.DEFAULT)"><span class="fa fa-sort"></span></a></th>
+            <!-- <th scope="col">Username <a href="" ng-click="sort(COLUMNS.USERNAME)"><span class="fa fa-sort"></span></a></th> -->
+            <th scope="col">Category <a href="" ng-click="sort(COLUMNS.CATEGORY)"><span class="fa fa-sort"></span></a></th>
+            <th scope="col">Prev Balance</th>
+            <th scope="col">Amount <a href="" ng-click="sort(COLUMNS.AMOUNT)"><span class="fa fa-sort"></span></a></th>
+            <th scope="col">New Balance</th>
+            <th scope="col">Memo <a href="" ng-click="sort(COLUMNS.MEMO)"><span class="fa fa-sort"></span></a></th>
+            <th scope="col">Date <a href="" ng-click="sort(COLUMNS.DATE)"><span class="fa fa-sort"></span></a></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="transaction in filteredTransactions | orderBy : orderTransactions() : reverseOrder">
+            <td scope="row">{{ getTransNumber(transaction) }}</td>
+            <!-- <td scope="row">{{ getUsername(transaction) }}</td> -->
+            <td scope="row">{{ getCategory(transaction) }}</td>
+            <td scope="row">${{ getPrevBalance(transaction) }}</td>
+            <td scope="row">${{ getSign(transaction) }}{{ getTransAmount(transaction) }}</td>
+            <td scope="row">${{ getNewBalance(transaction) }}</td>
+            <td scope="row">{{ getMemo(transaction) }}</td>
+            <td scope="row">{{ getDate(transaction) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

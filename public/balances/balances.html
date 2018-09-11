@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <div class="row mb-3 font-weight-total">
+    TOTAL = ${{ total }}
+  </div>
+  <div class="row">
+    <div ng-repeat="category in categories | orderBy : 'category'" class="col-xl-4 col-lg-6">
+      <div class="row row-background-grey table">
+        <div class="col-8">{{ category.category }}</div>
+        <div class="col-4" ng-class="{ 'text-danger': isNegative(category) }">${{ getBalance(category) }}</div>
+      </div>
+    </div>
+  </div>
+</div>

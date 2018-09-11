@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>BudgetApp</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/dist/bootstrap-4.0.0-beta.2-dist/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/dist/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link rel="stylesheet" media="all" href="/stylesheets/budget-app.css">
+    <script src="/dist/angular-1.6.6.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-sanitize.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <!-- <script src="/dist/ui-bootstrap-tpls-3.0.0-beta.3.min.js"></script> -->
+    <script src="/dist/ui-bootstrap-tpls-3.0.3.min.js"></script>
+    <script src="/dist/node_modules/lodash/lodash.min.js"></script>
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <!-- App Modules Here -->
+    <script src="budget-app-controller.js"></script>
+    <script src="balances/balances-controller.js"></script>
+    <script src="transactions/transactions-controller.js"></script>
+    <script src="allocations/allocations-controller.js"></script>
+    <script src="history/history-controller.js"></script>
+
+  </head>
+  <body>
+    <div ng-cloak ng-app="budgetApp" ng-controller="budgetAppCtrl">
+      <div ng-if="!isSignedIn">
+        Please sign in!
+      </div>
+      <div ng-if="isSignedIn">
+        <div ng-show="isLoaded">
+          <div class="container-fluid">      
+            <div class="row justify-content-sm-center">
+              <div uib-alert class="col-sm-9 col-md-8 col-lg-7 col-xl-6 text-center"
+                    ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')"
+                    close="closeAlert($index)"><div ng-bind-html="alert.msg"></div></div>
+            </div>
+          </div>
+          <div class="pow-container">
+            <div class="row container-fluid">
+              <div class="col-md-auto nav flex-column nav-pills text-right" id="v-pills-tab" role="tablist" >
+                <a class="nav-link active" data-toggle="pill" href="#balances" role="tab" >
+                  <span class="tab-font">Balances</span>
+                </a>
+                <a class="nav-link" data-toggle="pill" href="#transactions" role="tab" >
+                  <span class="tab-font">Transactions</span>
+                </a>
+                <a class="nav-link" data-toggle="pill" href="#allocations" role="tab" >
+                  <span class="tab-font">Budget</span>
+                </a>
+                <a class="nav-link" data-toggle="pill" href="#history" role="tab" >
+                  <span class="tab-font">History</span>
+                </a>
+              </div>
+              <div class="col tab-content tab-content-test" id="v-pills-tabContent">
+                <div class="activity-container tab-pane fade show active" id="balances" role="tabpanel" >
+                  <balances-tab categories="categories" total="total"></balances-tab>
+                </div>
+                <div class="activity-container tab-pane fade" id="transactions" role="tabpanel" >
+                  <transactions-tab categories="categories"
+                                    transactions="transactions"
+                                    update-total="updateTotal()"
+                                    alerts="alerts"></transactions-tab>
+                </div>
+                <div class="activity-container tab-pane fade" id="allocations" role="tabpanel" >
+                  <allocations-tab categories="categories"></allocations-tab>
+                </div>
+                <div class="activity-container tab-pane fade" id="history" role="tabpanel" >
+                  <history-tab transactions="transactions"></history-tab>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div ng-if="!isLoaded" class="state-officer-container text-center" style="font-size: 24pt">
+          Loading...  <span class="fa fa-circle-o-notch fa-spin"></span>
+        </div>
+      </div>
+    </div>
+    
+
+    <script type="text/javascript" src="/dist/node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+    <script type="text/javascript" src="/dist/node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="/dist/bootstrap-4.0.0-beta.2-dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

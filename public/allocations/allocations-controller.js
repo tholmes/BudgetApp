@@ -78,9 +78,21 @@ app.directive("allocationsTab", function ($http, $uibModal) {
       });
     };
 
+    scope.allChecked = false;
+    scope.allCheckedDisplay = scope.allChecked ? "Unselect All" : "Select All";
+
+    function checkboxAllClicked() {
+      scope.allChecked = !scope.allChecked;
+      scope.allCheckedDisplay = scope.allChecked ? "Unselect All" : "Select All";
+      _.forEach(scope.categories, function (category) {
+        category.isChecked = scope.allChecked;
+      });
+    }
+
     scope.$watch("categories", function (newValues, oldValues, scope) {
+      var categoriesChecked = _.filter(scope.categories, { isChecked: true });
       var total = 0.00;
-      _.forEach(newValues, function (category) {
+      _.forEach(categoriesChecked, function (category) {
         total += parseFloat(category.allocation);
       });
       scope.total = total.toFixed(2);
@@ -89,6 +101,7 @@ app.directive("allocationsTab", function ($http, $uibModal) {
     scope.deleteCategory = deleteCategory;
     scope.getAllocation = getAllocation;
     scope.openCategoryModal = openCategoryModal;
+    scope.checkboxAllClicked = checkboxAllClicked;
   }
 });
 

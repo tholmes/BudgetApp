@@ -15,56 +15,56 @@
           </div>      
           <div id="collapse-withdrawal" class="collapse show" role="tabpanel">
             <div class="card-body">
-                              <div class="row align-items-end">
-                                <div class="col-auto form-column">
-                                  <div class="row">
-                                    <div class="form-label">Category</div>
-                                  </div>
-                                  <div class="row">
-                                    <select class="form-control" ng-model="withdrawal.selectedCategory"
-                                            ng-options="category.category for category in categories | orderBy : 'category'">
-                                      <option value="" label="-- Select Category --" disabled selected="withdrawal.selectedCategory"></option>
-                                    </select>
-                                  </div>
-                                </div>
-                                <div class="col-auto form-column">
-                                  <div class="row">
-                                    <div class="form-label">Current Amount</div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="form-control" ng-class="{ 'text-danger': isNegative(withdrawal.selectedCategory) }">
-                                      ${{ getBalance(withdrawal.selectedCategory) }}
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-auto form-column">
-                                  <div class="row">
-                                    <div class="form-label">Withdrawal Amount</div>
-                                  </div>
-                                  <div class="row">
-                                    <input type="text" class="form-control" ng-model="withdrawal.amount" value="">
-                                  </div>
-                                </div>
-                                <div class="col-auto form-column">
-                                  <div class="row">
-                                    <div class="form-label">Memo</div>
-                                  </div>
-                                  <div class="row">
-                                    <input type="text" class="form-control" ng-model="withdrawal.memo" value="">
-                                  </div>
-                                </div>
-                                <div class="col-auto form-column">
-                                  <div class="row">
-                                    <div class="form-label">Date</div>
-                                  </div>
-                                  <div class="row">
-                                    <md-datepicker md-open-on-focus ng-model="withdrawal.date"></md-datepicker>
-                                  </div>
-                                </div>
-                                <div class="col-auto form-column">
-                                  <a class="btn btn-sm btn-primary" href="" ng-click="makeWithdrawal()">Withdraw</a>
-                                </div>
-                              </div>
+              <div class="row align-items-end">
+                <div class="col-auto form-column">
+                  <div class="row">
+                    <div class="form-label">Category</div>
+                  </div>
+                  <div class="row">
+                    <select class="form-control" ng-model="withdrawal.selectedCategory"
+                            ng-options="category.category for category in categories | orderBy : 'category'">
+                      <option value="" label="-- Select Category --" disabled selected="withdrawal.selectedCategory"></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-auto form-column">
+                  <div class="row">
+                    <div class="form-label">Current Amount</div>
+                  </div>
+                  <div class="row">
+                    <div class="form-control" ng-class="{ 'text-danger': isNegative(withdrawal.selectedCategory) }">
+                      ${{ getBalance(withdrawal.selectedCategory) }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-auto form-column">
+                  <div class="row">
+                    <div class="form-label">Withdrawal Amount</div>
+                  </div>
+                  <div class="row">
+                    <input type="text" class="form-control" ng-model="withdrawal.amount" value="">
+                  </div>
+                </div>
+                <div class="col-auto form-column">
+                  <div class="row">
+                    <div class="form-label">Memo</div>
+                  </div>
+                  <div class="row">
+                    <input type="text" class="form-control" ng-model="withdrawal.memo" value="">
+                  </div>
+                </div>
+                <div class="col-auto form-column">
+                  <div class="row">
+                    <div class="form-label">Date</div>
+                  </div>
+                  <div class="row">
+                    <md-datepicker md-open-on-focus ng-model="withdrawal.date"></md-datepicker>
+                  </div>
+                </div>
+                <div class="col-auto form-column">
+                  <a class="btn btn-sm btn-primary" href="" ng-click="makeWithdrawal()">Withdraw</a>
+                </div>
+              </div>
             </div>
           </div>          
         </div>

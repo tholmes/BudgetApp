@@ -39,7 +39,7 @@ app.directive("transactionsTab", function ($http, $uibModal, Upload, $q) {
       DEPOSIT: "DEPOSIT"
     };
 
-    const ALL = "- ALL -";
+    const ALL = "- ALL Selected -";
 
     function getBalance(selectedCategory) {
       if (selectedCategory) {
@@ -118,8 +118,8 @@ app.directive("transactionsTab", function ($http, $uibModal, Upload, $q) {
         return;
       }
       var deposit = _.pick(scope.deposit, ["date", "memo"]);
-      deposit.selectedCategory = scope.categories[index];
-      deposit.amount = parseFloat(scope.categories[index].allocation).toFixed(2);
+      deposit.selectedCategory = scope.categoriesChecked[index];
+      deposit.amount = parseFloat(scope.categoriesChecked[index].allocation).toFixed(2);
       // TODO: for now, clear previous alert(s) (only show one at a time)
       // create a message tie a message id (and maybe description) to a request and a response
       var message = "Depositing $" + deposit.amount + " into '" + deposit.selectedCategory.category +
@@ -137,22 +137,7 @@ app.directive("transactionsTab", function ($http, $uibModal, Upload, $q) {
 
     function makeDeposit() {
       if (scope.deposit.selectedCategory.category === ALL) {
-        //if (_.isEmpty(scope.deposit.gross)) {
-          // Report error - gross cannot be empty
-        //  return;
-        //}
-        // Loop through ALL categories and create Deposit Transactions according to their allocations
-        /*
-        _.forEach(scope.categories, function (category) {
-          var deposit = _.pick(scope.deposit, ["date", "memo"]);
-          deposit.selectedCategory = category;
-          deposit.amount = parseFloat(scope.deposit.gross * (parseFloat(category.allocation).toFixed(2)/100.00)).toFixed(2);
-          if (deposit.amount > 0.00) { // No need to send "deposits" with zero amounts
-            sendTransaction(formTransaction("", TYPE.DEPOSIT, deposit));
-          }
-        });
-        */
-       depositAll(0, scope.categories.length);
+       depositAll(0, scope.categoriesChecked.length);
       } else {
         if (_.isEmpty(scope.deposit.gross)) {
           // Find all categories with special flag and create a Deposit Transaction for each,
@@ -161,14 +146,6 @@ app.directive("transactionsTab", function ($http, $uibModal, Upload, $q) {
         sendTransaction(formTransaction("", TYPE.DEPOSIT, scope.deposit));
       }
     }
-
-    scope.$watch("categories", function (newValues, oldValues, scope) {
-      var total = 0.00;
-      _.forEach(newValues, function (category) {
-        total += parseFloat(category.allocation);
-      });
-      scope.deposit.gross = total.toFixed(2);
-    }, true);
 
     function showDepositAmount() {
       return _.get(scope, "deposit.selectedCategory.category", ALL) != ALL;
@@ -183,7 +160,16 @@ app.directive("transactionsTab", function ($http, $uibModal, Upload, $q) {
       var categoryAll = {
         category: ALL
       };
-      scope.adjustedCategories.push(categoryAll);
+      scope.categoriesChecked = _.filter(scope.adjustedCategories, { isChecked: true });
+      if (scope.categoriesChecked.length > 1) {
+        scope.adjustedCategories.push(categoryAll);
+      }
+
+      var total = 0.00;
+      _.forEach(scope.categoriesChecked, function (category) {
+        total += parseFloat(category.allocation);
+      });
+      scope.deposit.gross = total.toFixed(2);
     }, true);
 
     scope.getBalance = getBalance;

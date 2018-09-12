@@ -36,7 +36,7 @@ app.directive("historyTab", function ($http, $uibModal, Upload, $q) {
     }
 
     scope.filteredTransactions = [];
-    scope.reverseOrder = false;
+    scope.reverseOrder = true;
     scope.orderColumn = scope.COLUMNS.DEFAULT;
     scope.radioDateFilter = "defaultDate";
     scope.tableFilter = "";

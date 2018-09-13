@@ -1,7 +1,14 @@
-const DATABASE = "budget.db";
+const DATABASE_HOME = process.env.LOCALAPPDATA + "/BudgetApp/";
+const DATABASE = DATABASE_HOME + "budget.db";
+const fs = require("fs");
 const sqlite3 = require("sqlite3");
 const GUID = require("uuid/v1");
 const _ = require("lodash");
+
+// Check if DATABASE_HOME exists
+if (!fs.existsSync(DATABASE_HOME)) {
+  fs.mkdirSync(DATABASE_HOME)
+}
 
 var db = new sqlite3.Database(DATABASE);
 require("./database-create").create(db);

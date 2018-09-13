@@ -4,7 +4,8 @@ app.directive("allocationsTab", function ($http, $uibModal) {
     templateUrl : "allocations/allocations.html",
     link: link,
     scope: {
-      categories: "="
+      categories: "=",
+      updateTotal: "&"
     }
   };
   
@@ -39,6 +40,7 @@ app.directive("allocationsTab", function ($http, $uibModal) {
       } else { // Existing category
         scope.categories[index] = category;
       }
+      scope.updateTotal();
     }
 
     function deleteCategory(category) {

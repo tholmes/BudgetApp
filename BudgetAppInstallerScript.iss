@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "BudgetApp"
-#define MyAppVersion "18.09.12"
+#define MyAppVersion "18.09.13"
 #define MyAppPublisher "HolmeswareApps"
 #define MyAppURL "https://github.com/tholmes/BudgetApp"
 #define MyAppExeName "BudgetApp.bat"
@@ -23,7 +23,7 @@ DefaultDirName={pf}\{#MyAppName}
 DisableDirPage=yes
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
-OutputDir=C:\Users\Tim\Documents\dev\BudgetApp\output
+OutputDir=C:\Users\Tim\Documents\dev\BudgetApp\Installer
 OutputBaseFilename=BudgetApp-setup
 Compression=lzma
 SolidCompression=yes

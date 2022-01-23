@@ -26,7 +26,7 @@ function executeAutomaticWithdrawals() {
           if (autoWithdrawal.repeat > 0) {
             rescheduleAutoWithdrawal(autoWithdrawal);
           }
-          database.deleteAutomaticWithdrawal(autoWithdrawal, () => {});
+          database.deleteAutomaticWithdrawal(autoWithdrawal.id, () => {});
         }, transaction);
       }, autoWithdrawal.category_id);
 

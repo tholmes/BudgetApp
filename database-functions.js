@@ -278,10 +278,10 @@ function readExpiredAutomaticWithdrawals(nowMs, cb) {
   db.close();
 }
 
-function deleteAutomaticWithdrawal(autoWithdrawal, cb) {
+function deleteAutomaticWithdrawal(autoWithdrawalId, cb) {
   var db = new sqlite3.Database(DATABASE);
   var values = {
-    $id: autoWithdrawal.id
+    $id: autoWithdrawalId
   };
   db.run(
     "DELETE FROM automatic_withdrawals " +

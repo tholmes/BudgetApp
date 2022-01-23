@@ -9,6 +9,7 @@
       <table class="table table-striped">
         <thead>
           <tr>
+            <th></th>
             <th scope="col">Date <a href="" ng-click="sort(COLUMNS.DATE)"><span class="fa fa-sort"></span></a></th>
             <th scope="col">Category <a href="" ng-click="sort(COLUMNS.CATEGORY)"><span class="fa fa-sort"></span></a></th>
             <th scope="col">Amount <a href="" ng-click="sort(COLUMNS.AMOUNT)"><span class="fa fa-sort"></span></a></th>
@@ -18,6 +19,10 @@
         </thead>
         <tbody>
           <tr ng-repeat="element in autoWithdrawals | orderBy : 'date'">
+            <td>
+              <a class="btn btn-sm btn-primary" href="" ng-click="openAutoPayModal(element)"><span class="fa fa-pencil"></span></a>
+              <a class="btn btn-sm btn-danger" href="" ng-click="deleteAutoPay(element)"><span class="fa fa-trash-o"></span></a>
+            </td>
             <td scope="row">{{ element.date | date: 'MM/dd/yyyy' }}</td>
             <td scope="row">{{ element.category }}</td>
             <td scope="row">${{ element.amount | number: 2 }}</td>

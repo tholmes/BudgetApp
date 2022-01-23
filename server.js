@@ -62,10 +62,10 @@ route.get("/api/automatic-withdrawals", function (req, res) {
   });
 });
 
-route.delete("/api/automatic-withdrawals/:category_id", function (req, res) {
-  database.deleteAutomaticWithdrawal(data => {
+route.delete("/api/automatic-withdrawals/:id", function (req, res) {
+  database.deleteAutomaticWithdrawal(req.params.id, data => {
     res.json(data);
-  }, req.params.id);
+  });
 });
 
 route.post("/api/account", jsonParser, function (req, res) {

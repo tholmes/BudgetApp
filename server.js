@@ -50,6 +50,24 @@ route.get("/api/transaction", function (req, res) {
   });
 });
 
+route.post("/api/automatic-withdrawals", jsonParser, function (req, res) {
+  database.createAutomaticWithdrawal(data => {
+    res.json(data);
+  }, req.body);
+});
+
+route.get("/api/automatic-withdrawals", function (req, res) {
+  database.readAutomaticWithdrawals(data => {
+    res.json(data);
+  });
+});
+
+route.delete("/api/automatic-withdrawals/:category_id", function (req, res) {
+  database.deleteAutomaticWithdrawal(data => {
+    res.json(data);
+  }, req.params.id);
+});
+
 route.post("/api/account", jsonParser, function (req, res) {
   database.createAccount(function (data) {
     res.json(data);

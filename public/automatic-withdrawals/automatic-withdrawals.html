@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <div class="row justify-content-between mb-3 mr-0">
+    <div class="col text-right">
+      <a class="btn btn-sm btn-success" href="" ng-click="openAutoPayModal()"><span class="fa fa-plus"> New Auto-Pay</span></a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Date <a href="" ng-click="sort(COLUMNS.DATE)"><span class="fa fa-sort"></span></a></th>
+            <th scope="col">Category <a href="" ng-click="sort(COLUMNS.CATEGORY)"><span class="fa fa-sort"></span></a></th>
+            <th scope="col">Amount <a href="" ng-click="sort(COLUMNS.AMOUNT)"><span class="fa fa-sort"></span></a></th>
+            <th scope="col">Memo <a href="" ng-click="sort(COLUMNS.MEMO)"><span class="fa fa-sort"></span></a></th>
+            <th scope="col">Every (x) Months <a href="" ng-click="sort(COLUMNS.REPEAT)"><span class="fa fa-sort"></span></a></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="element in autoWithdrawals | orderBy : 'date'">
+            <td scope="row">{{ element.date | date: 'MM/dd/yyyy' }}</td>
+            <td scope="row">{{ element.category }}</td>
+            <td scope="row">${{ element.amount | number: 2 }}</td>
+            <td scope="row">{{ element.memo }}</td>
+            <td scope="row">{{ element.repeat }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+  

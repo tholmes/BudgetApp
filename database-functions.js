@@ -252,6 +252,19 @@ function createAutomaticWithdrawal(autoWithdrawal, cb) {
   db.close();
 }
 
+function readAutomaticWithdrawals(cb) {
+  var db = new sqlite3.Database(DATABASE);
+  var values = {};
+  db.all(
+    `SELECT * FROM automatic_withdrawals`,
+    values,
+    function (error, rows) {
+      new SqlResponse(error, rows).read(cb);
+    }
+  );
+  db.close();
+}
+
 function readExpiredAutomaticWithdrawals(nowMs, cb) {
   var db = new sqlite3.Database(DATABASE);
   var values = {};
@@ -300,5 +313,6 @@ exports.migrateTransaction = migrateTransaction;
 
 // Automatic Withdrawals
 exports.createAutomaticWithdrawal = createAutomaticWithdrawal;
+exports.readAutomaticWithdrawals = readAutomaticWithdrawals;
 exports.readExpiredAutomaticWithdrawals = readExpiredAutomaticWithdrawals;
 exports.deleteAutomaticWithdrawal = deleteAutomaticWithdrawal;

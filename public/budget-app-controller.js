@@ -3,7 +3,8 @@ var app = angular.module('budgetApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap'
                                 "balancesApp",
                                 "transactionsApp",
                                 "allocationsApp",
-                                "historyApp"
+                                "historyApp",
+                                "autoWithdrawalsApp",
                               ]);
 app.controller('budgetAppCtrl', function($scope, $http, $q) {
 
@@ -19,12 +20,14 @@ app.controller('budgetAppCtrl', function($scope, $http, $q) {
 
   var promises = {
     promiseCategories: $http.get("/api/category"),
-    promiseTransactions: $http.get("/api/transaction")
+    promiseTransactions: $http.get("/api/transaction"),
+    promiseAutoWithdrawals: $http.get("/api/automatic-withdrawals"),
   };
 
   $q.all(promises).then(function (responses) {
     $scope.categories = deserializeCategories(responses.promiseCategories.data);
     $scope.transactions = deserializeTransactions(responses.promiseTransactions.data);
+    $scope.autoWithdrawals = responses.promiseAutoWithdrawals.data;
     updateTotal();
     $scope.isLoaded = true;
   });

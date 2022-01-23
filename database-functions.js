@@ -229,6 +229,58 @@ function readAccount(cb) {
   db.close();
 }
 
+function createAutomaticWithdrawal(autoWithdrawal, cb) {
+  var db = new sqlite3.Database(DATABASE);
+  var values = {
+    $id: GUID(),
+    $category_id: autoWithdrawal.category_id,
+    $category: autoWithdrawal.category,
+    $amount: autoWithdrawal.amount,
+    $memo: autoWithdrawal.memo,
+    $date: autoWithdrawal.date,
+    $repeat: autoWithdrawal.repeat
+  };
+  db.run(
+    "INSERT INTO automatic_withdrawals " +
+    "(id, category_id, category, amount, memo, date, repeat) " +
+    "VALUES ($id, $category_id, $category, $amount, $memo, $date, $repeat)",
+    values,
+    function (error) {
+      new SqlResponse(error, values).write(cb);
+    }
+  );
+  db.close();
+}
+
+function readExpiredAutomaticWithdrawals(nowMs, cb) {
+  var db = new sqlite3.Database(DATABASE);
+  var values = {};
+  db.all(
+    `SELECT * FROM automatic_withdrawals WHERE date <= ${nowMs}`,
+    values,
+    function (error, rows) {
+      new SqlResponse(error, rows).read(cb);
+    }
+  );
+  db.close();
+}
+
+function deleteAutomaticWithdrawal(autoWithdrawal, cb) {
+  var db = new sqlite3.Database(DATABASE);
+  var values = {
+    $id: autoWithdrawal.id
+  };
+  db.run(
+    "DELETE FROM automatic_withdrawals " +
+    "WHERE id = $id",
+    values,
+    function (error) {
+      new SqlResponse(error, values).write(cb);
+    }
+  );
+  db.close();
+}
+
 // Category CRUD
 exports.createCategory = createCategory;
 exports.readCategory = readCategory;
@@ -245,3 +297,8 @@ exports.readAccount = readAccount;
 
 // Migration
 exports.migrateTransaction = migrateTransaction;
+
+// Automatic Withdrawals
+exports.createAutomaticWithdrawal = createAutomaticWithdrawal;
+exports.readExpiredAutomaticWithdrawals = readExpiredAutomaticWithdrawals;
+exports.deleteAutomaticWithdrawal = deleteAutomaticWithdrawal;

@@ -3,6 +3,7 @@ const route = express();
 const bodyParser = require("body-parser");
 const jsonParser = bodyParser.json();
 const database = require("./database-functions");
+const automaticWithdrawals = require("./automatic-withdrawals");
 const path = require("path");
 
 route.use(express.static(path.join(__dirname, 'public')));
@@ -66,3 +67,5 @@ route.all("/api/*", function (req, res) {
 });
  
 route.listen(3000);
+
+automaticWithdrawals.initialize();

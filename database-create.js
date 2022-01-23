@@ -36,6 +36,18 @@ function createDatabase(db) {
     "(" +
     "version INTEGER" +
     ")");
+    // Create AUTOMATIC_WITHDRAWALS table
+    db.run("CREATE TABLE if not exists automatic_withdrawals " +
+    "(" +
+    "id TEXT UNIQUE, " +
+    "category_id TEXT" +
+    "category TEXT, " +
+    "amount REAL, " +
+    "memo TEXT, " +
+    "date INTEGER, " +
+    "repeat INTEGER" +
+    ")"
+    );
   });
 }
 

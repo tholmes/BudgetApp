@@ -9,7 +9,7 @@ function executeAutomaticWithdrawals() {
   database.readExpiredAutomaticWithdrawals(now.getTime(), (rows) => {
     rows.forEach(autoWithdrawal => {
 
-      database.readCategory((categories) => {
+      database.readCategory(autoWithdrawal.category_id, (categories) => {
         var balance = categories[0].balance;
         var transaction = {
           username: "Automatic Withdrawal",
@@ -22,13 +22,13 @@ function executeAutomaticWithdrawals() {
           memo: autoWithdrawal.memo,
           date: now / 1000,
         };        
-        database.createTransaction(() => {
+        database.createTransaction(transaction, () => {
           if (autoWithdrawal.repeat > 0) {
             rescheduleAutoWithdrawal(autoWithdrawal);
           }
           database.deleteAutomaticWithdrawal(autoWithdrawal.id, () => {});
-        }, transaction);
-      }, autoWithdrawal.category_id);
+        });
+      });
 
     });
   });

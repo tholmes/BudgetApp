@@ -23,8 +23,8 @@ app.directive("allocationsTab", function ($http, $uibModal) {
       return {
         category_id: src.category_id,
         category: src.category,
-        balance: parseFloat(src.balance).toFixed(2),
-        allocation: parseFloat(src.allocation).toFixed(2)
+        balance: src.balance,
+        allocation: src.allocation
       }
     }
 
@@ -45,7 +45,7 @@ app.directive("allocationsTab", function ($http, $uibModal) {
 
     function deleteCategory(category) {
       $http.delete("/api/category/" + category.category_id)
-      .then(function (response) {
+      .then(response => {
         if (response.data.error) {
           // Report error
         } else {
@@ -67,7 +67,7 @@ app.directive("allocationsTab", function ($http, $uibModal) {
         } } }
       });
       
-      modalInstance.result.then(function (data) {
+      modalInstance.result.then(data => {
         if (data.category_id) { // PUT
           $http.put("/api/category/" + data.category_id, _.omit(data, data.category_id))
           .then(handleResponse);

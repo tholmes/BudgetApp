@@ -29,6 +29,7 @@
     <script src="transactions/transactions-controller.js"></script>
     <script src="allocations/allocations-controller.js"></script>
     <script src="history/history-controller.js"></script>
+    <script src="automatic-withdrawals/automatic-withdrawals-controller.js"></script>
 
   </head>
   <body>
@@ -60,6 +61,9 @@
                 <a class="nav-link" data-toggle="pill" href="#history" role="tab" >
                   <span class="tab-font">History</span>
                 </a>
+                <a class="nav-link" data-toggle="pill" href="#auto-withdrawals" role="tab" >
+                  <span class="tab-font">Auto-Pay</span>
+                </a>
               </div>
               <div class="col tab-content tab-content-test" id="v-pills-tabContent">
                 <div class="activity-container tab-pane fade show active" id="balances" role="tabpanel" >
@@ -77,6 +81,10 @@
                 </div>
                 <div class="activity-container tab-pane fade" id="history" role="tabpanel" >
                   <history-tab transactions="transactions"></history-tab>
+                </div>
+                <div class="activity-container tab-pane fade" id="auto-withdrawals" role="tabpanel" >
+                  <automatic-withdrawals-tab auto-withdrawals="autoWithdrawals"
+                                             categories="categories"></automatic-withdrawals-tab>
                 </div>
               </div>
             </div>

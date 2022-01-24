@@ -23,8 +23,8 @@ app.directive("allocationsTab", function ($http, $uibModal) {
       return {
         category_id: src.category_id,
         category: src.category,
-        balance: parseFloat(src.balance).toFixed(2),
-        allocation: parseFloat(src.allocation).toFixed(2)
+        balance: src.balance,
+        allocation: src.allocation
       }
     }
 

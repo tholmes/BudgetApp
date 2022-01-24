@@ -25,23 +25,12 @@ app.controller('budgetAppCtrl', function($scope, $http, $q) {
   };
 
   $q.all(promises).then(responses => {
-    $scope.categories = deserializeCategories(responses.promiseCategories.data);
+    $scope.categories = responses.promiseCategories.data;
     $scope.transactions = deserializeTransactions(responses.promiseTransactions.data);
     $scope.autoWithdrawals = responses.promiseAutoWithdrawals.data;
     updateTotal();
     $scope.isLoaded = true;
   });
-
-  function deserializeCategories(categories) {
-    return _.map(categories, function (category) {
-      return {
-        category_id: category.category_id,
-        category: category.category,
-        balance: parseFloat(category.balance).toFixed(2),
-        allocation: parseFloat(category.allocation).toFixed(2)
-      };
-    });
-  }
 
   function deserializeTransactions(transactions) {
     return _.map(transactions, function (transaction) {

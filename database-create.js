@@ -1,5 +1,5 @@
 function createDatabase(db) {
-  db.serialize(function () {
+  db.serialize(() => {
     // Create CATEGORIES table
     db.run("CREATE TABLE if not exists categories " +
            "(" +

@@ -27,7 +27,7 @@ app.directive("automaticWithdrawalsTab", function ($http, $uibModal) {
 
     function deleteAutoPay(item) {
       $http.delete("/api/automatic-withdrawals/" + item.id)
-      .then(function (response) {
+      .then(response => {
         if (response.data.error) {
           // Report error
         } else {
@@ -50,7 +50,7 @@ app.directive("automaticWithdrawalsTab", function ($http, $uibModal) {
         } } }
       });
       
-      modalInstance.result.then(function (data) {
+      modalInstance.result.then(data => {
         if (data.id) { // PUT
           $http.put("/api/automatic-withdrawals/" + data.id, data)
           .then(handleResponse);

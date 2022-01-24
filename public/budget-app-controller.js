@@ -24,7 +24,7 @@ app.controller('budgetAppCtrl', function($scope, $http, $q) {
     promiseAutoWithdrawals: $http.get("/api/automatic-withdrawals"),
   };
 
-  $q.all(promises).then(function (responses) {
+  $q.all(promises).then(responses => {
     $scope.categories = deserializeCategories(responses.promiseCategories.data);
     $scope.transactions = deserializeTransactions(responses.promiseTransactions.data);
     $scope.autoWithdrawals = responses.promiseAutoWithdrawals.data;

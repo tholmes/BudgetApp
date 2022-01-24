@@ -15,7 +15,7 @@ route.post("/api/category", jsonParser, (req, res) => {
 });
 
 route.get("/api/category", (req, res) => {
-  database.readCategory(data => {
+  database.readAllCategories(data => {
     res.json(data);
   });
 });

@@ -62,17 +62,26 @@ function createCategory(category, cb) {
   db.close();
 }
 
+function readAllCategories(cb) {
+  var db = new sqlite3.Database(DATABASE);
+  var values = {};
+  db.all(
+    `SELECT * FROM categories`,
+    values,
+    function (error, rows) {
+      new SqlResponse(error, rows).read(cb);
+    }
+  );
+  db.close();
+}
+
 function readCategory(category_id, cb) {
   var db = new sqlite3.Database(DATABASE);
   var values = {
     $category_id: category_id
   };
-  var sql = {
-    single: "SELECT * FROM categories WHERE category_id = $category_id",
-    all: "SELECT * FROM categories"
-  }  
   db.all(
-    sql[category_id ? "single" : "all"],
+    `SELECT * FROM categories WHERE category_id = $category_id`,
     values,
     function (error, rows) {
       new SqlResponse(error, rows).read(cb);
@@ -320,6 +329,7 @@ function deleteAutomaticWithdrawal(autoWithdrawalId, cb) {
 // Category CRUD
 exports.createCategory = createCategory;
 exports.readCategory = readCategory;
+exports.readAllCategories = readAllCategories;
 exports.updateCategory = updateCategory;
 exports.deleteCategory = deleteCategory;
 

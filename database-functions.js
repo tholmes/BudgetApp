@@ -252,6 +252,29 @@ function createAutomaticWithdrawal(autoWithdrawal, cb) {
   db.close();
 }
 
+function updateAutomaticWithdrawals(id, autoWithdrawal, cb) {
+  var db = new sqlite3.Database(DATABASE);
+    var values = {
+      $id: id,
+      $category_id: autoWithdrawal.category_id,
+      $category: autoWithdrawal.category,
+      $amount: autoWithdrawal.amount,
+      $memo: autoWithdrawal.memo,
+      $date: autoWithdrawal.date,
+      $repeat: autoWithdrawal.repeat
+    };
+    db.run(
+      "UPDATE automatic_withdrawals " +
+      "SET category_id = $category_id, category = $category, amount = $amount, memo = $memo, date = $date, repeat = $repeat " +
+      "WHERE id = $id",
+      values,
+      function (error) {
+        new SqlResponse(error, values).write(cb);
+      }
+    );
+    db.close();
+  }
+
 function readAutomaticWithdrawals(cb) {
   var db = new sqlite3.Database(DATABASE);
   var values = {};
@@ -315,4 +338,5 @@ exports.migrateTransaction = migrateTransaction;
 exports.createAutomaticWithdrawal = createAutomaticWithdrawal;
 exports.readAutomaticWithdrawals = readAutomaticWithdrawals;
 exports.readExpiredAutomaticWithdrawals = readExpiredAutomaticWithdrawals;
+exports.updateAutomaticWithdrawals = updateAutomaticWithdrawals;
 exports.deleteAutomaticWithdrawal = deleteAutomaticWithdrawal;

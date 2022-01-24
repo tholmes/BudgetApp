@@ -51,9 +51,15 @@ route.get("/api/transaction", function (req, res) {
 });
 
 route.post("/api/automatic-withdrawals", jsonParser, function (req, res) {
-  database.createAutomaticWithdrawal(data => {
+  database.createAutomaticWithdrawal(req.body, data => {
     res.json(data);
-  }, req.body);
+  });
+});
+
+route.put("/api/automatic-withdrawals/:id", jsonParser, function (req, res) {
+  database.updateAutomaticWithdrawals(req.params.id, req.body, data => {
+    res.json(data);
+  });
 });
 
 route.get("/api/automatic-withdrawals", function (req, res) {

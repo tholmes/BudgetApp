@@ -5,6 +5,7 @@ app.directive("automaticWithdrawalsTab", function ($http, $uibModal) {
     link: link,
     scope: {
       autoWithdrawals: "=",
+      categories: "=",
     }
   };
   
@@ -42,9 +43,10 @@ app.directive("automaticWithdrawalsTab", function ($http, $uibModal) {
         ariaDescribedBy: 'modal-body',
         templateUrl: 'automatic-withdrawals/automatic-withdrawal.html',
         controller: "automaticWithdrawalCtrl",
-        size: "sm",
+        size: "", // medium
         resolve: { data: function () { return {
-          automaticWithdrawal: item
+          automaticWithdrawal: item,
+          categories: scope.categories
         } } }
       });
       
@@ -60,17 +62,6 @@ app.directive("automaticWithdrawalsTab", function ($http, $uibModal) {
         // Here if dismiss (cancel) was clicked
       });
     };
-
-    /*
-    scope.$watch("categories", function (newValues, oldValues, scope) {
-      var categoriesChecked = _.filter(scope.categories, { isChecked: true });
-      var total = 0.00;
-      _.forEach(categoriesChecked, function (category) {
-        total += parseFloat(category.allocation);
-      });
-      scope.total = total.toFixed(2);
-    }, true);
-    */
     
     scope.deleteAutoPay = deleteAutoPay;
     scope.openAutoPayModal = openAutoPayModal;
@@ -79,22 +70,31 @@ app.directive("automaticWithdrawalsTab", function ($http, $uibModal) {
 
 app.controller("automaticWithdrawalCtrl", function ($scope, $uibModalInstance, data) {
   
-  var category = data.category;
+  $scope.categories = data.categories;
+  
+  var autoPay = data.automaticWithdrawal;
   $scope.title = "Create";
 
-  if (category) {
+  if (autoPay) {
     $scope.title = "Edit";
-    $scope.category_id = category.category_id;
-    $scope.categoryName = category.category;
-    $scope.categoryBalance = category.balance;
-    $scope.categoryAllocation = category.allocation;
+    $scope.id = autoPay.id;
+    $scope.category_id = autoPay.category_id;
+    $scope.category = autoPay.category;
+    $scope.selectedCategory = _.find($scope.categories, { category_id: autoPay.category_id });
+    $scope.amount = autoPay.amount;
+    $scope.memo = autoPay.memo;
+    $scope.date = new Date(autoPay.date);
+    $scope.repeat = autoPay.repeat;
   }
 
   function create() {
     var output = {
-      category: $scope.categoryName,
-      balance: $scope.categoryBalance,
-      allocation: $scope.categoryAllocation
+      category_id: $scope.selectedCategory.category_id,
+      category: $scope.selectedCategory.category,
+      amount: $scope.amount,
+      memo: $scope.memo,
+      date: $scope.date.getTime(),
+      repeat: $scope.repeat,
     };
 
     $uibModalInstance.close(output);
@@ -102,11 +102,14 @@ app.controller("automaticWithdrawalCtrl", function ($scope, $uibModalInstance, d
 
   function update() {
     var output = {
-      category_id: $scope.category_id,
-      category: $scope.categoryName,
-      balance: $scope.categoryBalance,
-      allocation: $scope.categoryAllocation
-    };
+      id: $scope.id,
+      category_id: $scope.selectedCategory.category_id,
+      category: $scope.selectedCategory.category,
+      amount: $scope.amount,
+      memo: $scope.memo,
+      date: $scope.date.getTime(),
+      repeat: $scope.repeat,
+    }
 
     $uibModalInstance.close(output);
   };

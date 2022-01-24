@@ -9,9 +9,9 @@ const path = require("path");
 route.use(express.static(path.join(__dirname, 'public')));
 
 route.post("/api/category", jsonParser, (req, res) => {
-  database.createCategory(data => {
+  database.createCategory(req.body, data => {
     res.json(data);
-  }, req.body);
+  });
 });
 
 route.get("/api/category", (req, res) => {
@@ -21,27 +21,27 @@ route.get("/api/category", (req, res) => {
 });
 
 route.get("/api/category/:category_id", (req, res) => {
-  database.readCategory(data => {
+  database.readCategory(req.params.category_id, data => {
     res.json(data);
-  }, req.params.category_id);
+  });
 });
 
 route.put("/api/category/:category_id", jsonParser, (req, res) => {
-  database.updateCategory(data => {
+  database.updateCategory(req.params.category_id, req.body, data => {
     res.json(data);
-  }, req.params.category_id, req.body);
+  });
 });
 
 route.delete("/api/category/:category_id", (req, res) => {
-  database.deleteCategory(data => {
+  database.deleteCategory(req.params.category_id, data => {
     res.json(data);
-  }, req.params.category_id);
+  });
 });
 
 route.post("/api/transaction", jsonParser, (req, res) => {
-  database.createTransaction(data => {
+  database.createTransaction(req.body, data => {
     res.json(data);
-  }, req.body);
+  });
 });
 
 route.get("/api/transaction", (req, res) => {
@@ -75,9 +75,9 @@ route.delete("/api/automatic-withdrawals/:id", (req, res) => {
 });
 
 route.post("/api/account", jsonParser, (req, res) => {
-  database.createAccount(data => {
+  database.createAccount(req.body, data => {
     res.json(data);
-  }, req.body);
+  });
 });
 
 route.get("/api/account", (req, res) => {

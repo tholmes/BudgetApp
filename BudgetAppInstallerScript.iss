@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "BudgetApp"
-#define MyAppVersion "18.09.13"
+#define MyAppVersion "22.01.24"
 #define MyAppPublisher "HolmeswareApps"
 #define MyAppURL "https://github.com/tholmes/BudgetApp"
 #define MyAppExeName "BudgetApp.bat"
@@ -23,7 +23,7 @@ DefaultDirName={pf}\{#MyAppName}
 DisableDirPage=yes
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
-OutputDir=C:\Users\Tim\Documents\dev\BudgetApp\Installer
+OutputDir=C:\dev\BudgetApp\Installer
 OutputBaseFilename=BudgetApp-setup
 Compression=lzma
 SolidCompression=yes
@@ -35,13 +35,14 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\Tim\Documents\dev\BudgetApp\BudgetApp.bat"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Tim\Documents\dev\BudgetApp\database-create.js"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Tim\Documents\dev\BudgetApp\database-functions.js"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Tim\Documents\dev\BudgetApp\node.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Tim\Documents\dev\BudgetApp\server.js"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Tim\Documents\dev\BudgetApp\node_modules\*"; DestDir: "{app}\node_modules"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\Tim\Documents\dev\BudgetApp\public\*"; DestDir: "{app}\public"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\dev\BudgetApp\BudgetApp.bat"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\dev\BudgetApp\automatic-withdrawals.js"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\dev\BudgetApp\database-create.js"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\dev\BudgetApp\database-functions.js"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\dev\BudgetApp\node.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\dev\BudgetApp\server.js"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\dev\BudgetApp\node_modules\*"; DestDir: "{app}\node_modules"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\dev\BudgetApp\public\*"; DestDir: "{app}\public"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

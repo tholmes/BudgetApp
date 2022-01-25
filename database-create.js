@@ -40,7 +40,7 @@ function createDatabase(db) {
     db.run("CREATE TABLE if not exists automatic_withdrawals " +
     "(" +
     "id TEXT UNIQUE, " +
-    "category_id TEXT" +
+    "category_id TEXT, " +
     "category TEXT, " +
     "amount REAL, " +
     "memo TEXT, " +

@@ -2,13 +2,13 @@ const ONE_DAY_MS = 1/*day*/ * 24/*hour*/ * 60/*min*/ * 60/*sec*/ * 1000/*ms*/;
 const HOUR_OF_DAY = 2;
 
 const database = require("./database-functions");
+const _ = require("lodash");
 
 function executeAutomaticWithdrawals() {
   var now = new Date();
 
   database.readExpiredAutomaticWithdrawals(now.getTime(), (rows) => {
-    rows.forEach(autoWithdrawal => {
-
+    _.forEach(rows, autoWithdrawal => {
       database.readCategory(autoWithdrawal.category_id, (categories) => {
         var balance = categories[0].balance;
         var transaction = {
@@ -29,7 +29,6 @@ function executeAutomaticWithdrawals() {
           database.deleteAutomaticWithdrawal(autoWithdrawal.id, () => {});
         });
       });
-
     });
   });
 }

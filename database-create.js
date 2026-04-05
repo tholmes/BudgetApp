@@ -49,6 +49,28 @@ function createDatabase(db) {
     ")"
     );
   });
+  
+  // Add asset_type column, if it doesn't exist
+  db.all("PRAGMA table_info(categories)", (err, columns) => {
+    if (err) {
+      console.error("Error checking categories table:", err);
+      return;
+    }
+
+    const hasAssetType = columns.some(col => col.name === "asset_type");
+
+    if (!hasAssetType) { /* CASH, BANK, STOCK */
+      db.run("ALTER TABLE categories ADD COLUMN asset_type TEXT DEFAULT BANK", (err) => {
+        if (err) {
+          console.error("Error adding asset_type column:", err);
+        } else {
+          console.log("Added asset_type column to categories");
+        }
+      });
+    } else {
+      console.log("asset_type column already exists");
+    }
+  });
 }
 
 exports.create = createDatabase;

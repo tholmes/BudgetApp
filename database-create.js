@@ -67,8 +67,6 @@ function createDatabase(db) {
           console.log("Added asset_type column to categories");
         }
       });
-    } else {
-      console.log("asset_type column already exists");
     }
   });
 }
